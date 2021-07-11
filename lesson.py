@@ -714,9 +714,9 @@ def test_func(x, l=None):
 r = test_func(100)
 print(r)
 
-
 r = test_func(100)
 print(r)
+
 
 # pythonはデフォルト引数で参照渡しのオブジェクトを設定しないほうがいい。
 
@@ -724,11 +724,13 @@ print(r)
 
 
 def say_something(word, *args):
-	print('word=', word)
-	for arg in args:
-		print(arg)
+    print('word=', word)
+    for arg in args:
+        print(arg)
+
 
 say_something('hi', 'mike', 'nance')
+
 
 # あまり使わない(タプル作ってアンパッキング)
 # t = ('mike', 'nancy')
@@ -737,55 +739,65 @@ say_something('hi', 'mike', 'nance')
 # 53.キーワード引数の辞書化
 
 def menu(**kwargs):
-	# print(kwargs)
-	for k, v in kwargs.items():
-		print(k, v)
+    # print(kwargs)
+    for k, v in kwargs.items():
+        print(k, v)
+
+
 # menu(entree='beef', drink='coffee')
 
 d = {
-	'entree': 'beef',
-	'drink': 'ice coffe',
-	'dessert': 'ice'
+    'entree': 'beef',
+    'drink': 'ice coffe',
+    'dessert': 'ice'
 }
 
 menu(**d)
 
 print('########')
 
+
 # 順序が守る必要がある
 def menu(food, *args, **kwargs):
-	print(food)
-	print(args)
-	print(kwargs)
-menu('banana', 'apple', 'orange', entree='beef', drink = 'coffe')
+    print(food)
+    print(args)
+    print(kwargs)
+
+
+menu('banana', 'apple', 'orange', entree='beef', drink='coffe')
+
 
 # 54.Docstringsとは
 
 def example_func(param1, param2):
-	"""Example function with types documented in the docstring
+    """Example function with types documented in the docstring
 	Args:
 		parama1 (int): The first parameter.
 		param2 (str): The second parameter.
 	Returns:
 		bool: The return value. Trune to success, False otherwise.
 	"""
-	print(param1)
-	print(param2)
-	return True
+    print(param1)
+    print(param2)
+    return True
+
+
 print(example_func.__doc__)
 help(example_func)
+
+
 # help(example_func.__doc__)
 
 
 # 55.関数内関数
 
 def outer(a, b):
-	def plus(c, d):
-		return c + d
+    def plus(c, d):
+        return c + d
 
-	r1 = plus(a, b)
-	r2 = plus(b, a)
-	print(r1 + r2)
+    r1 = plus(a, b)
+    r2 = plus(b, a)
+    print(r1 + r2)
 
 
 outer(1, 2)
@@ -809,10 +821,10 @@ outer(1, 2)
 # print(r)
 
 def circel_area_func(pi):
-	def circle_area(radius):
-		return pi * radius ** 2
+    def circle_area(radius):
+        return pi * radius ** 2
 
-	return circle_area
+    return circle_area
 
 
 cal1 = circel_area_func(3.14)
@@ -823,29 +835,36 @@ cal2 = circel_area_func(3.141592)
 print(cal1(10))
 print(cal2(10))
 
+
 # 57.デコレーター
 
 def print_more(func):
-	def wrapper(*args, **kwargs):
-		print('func:', func.__name__)
-		print('args',args)
-		print('kwargs',kwargs)
-		result = func(*args, **kwargs)
-		print('result:', result)
-		return result
-	return wrapper
+    def wrapper(*args, **kwargs):
+        print('func:', func.__name__)
+        print('args', args)
+        print('kwargs', kwargs)
+        result = func(*args, **kwargs)
+        print('result:', result)
+        return result
+
+    return wrapper
+
 
 def print_info(func):
-	def wrapper(*args, **kwargs):
-		print('start')
-		result = func(*args, **kwargs)
-		print('end')
-		return result
-	return wrapper
+    def wrapper(*args, **kwargs):
+        print('start')
+        result = func(*args, **kwargs)
+        print('end')
+        return result
+
+    return wrapper
+
+
 @print_info
 @print_more
 def add_num(a, b):
-	return a + b
+    return a + b
+
 
 r = add_num(10, 20)
 print(r)
@@ -874,20 +893,25 @@ print(r)
 # 58.ラムダ
 l = ['Mon', 'tue', 'Wed', 'Thu', 'fri', 'sat', 'Sun']
 
+
 def change_words(words, func):
-	for word in words:
-		print(func(word))
+    for word in words:
+        print(func(word))
+
 
 def sample_func(word):
-	return word.capitalize()
+    return word.capitalize()
+
 
 def sample_func2(word):
-	return word.lower()
+    return word.lower()
+
+
 # sample_func = lambda word: word.capitalize()
 
-change_words(l, lambda  word: word.capitalize())
+change_words(l, lambda word: word.capitalize())
 
-change_words(l, lambda  word: word.lower())
+change_words(l, lambda word: word.lower())
 
 
 # 繰り返しオブジェクトに対して、その要素に関数を適応する
@@ -903,17 +927,18 @@ change_words(l, lambda  word: word.lower())
 #
 # print('#########')
 def counter(num=10):
-	for _ in range(num):
-		yield 'run'
+    for _ in range(num):
+        yield 'run'
 
 
 def greeting():
-	yield 'good morning'
-	yield 'good afternoon'
-	yield 'good night'
+    yield 'good morning'
+    yield 'good afternoon'
+    yield 'good night'
+
 
 for g in greeting():
-	print(g)
+    print(g)
 
 # 反復処理だが、ジェネレーターの場合、
 print('#########')
@@ -947,26 +972,25 @@ t2 = (5, 6, 7, 8, 9, 10)
 r = []
 
 for i in t:
-	if i % 2 == 0:
-		r.append(i)
+    if i % 2 == 0:
+        r.append(i)
 
 print(r)
 
 r = [i for i in t if i % 2 == 0]
 print(r)
 
-
 """
 メリットは、メモリの消費。短く書ける.
 """
 r = []
-for i in t :
-	for j in t2:
-		r.append(i * j)
+for i in t:
+    for j in t2:
+        r.append(i * j)
 
 print(r)
 
-r = [i*j for i in t for j in t2]
+r = [i * j for i in t for j in t2]
 print(r)
 
 """
@@ -981,21 +1005,20 @@ f = ['coffee', 'milk', 'water']
 d = {}
 
 for x, y in zip(w, f):
-	d[x] = y
+    d[x] = y
 
 print(d)
 
 d = {x: y for x, y in zip(w, f)}
 print(d)
 
-
 # 62.集合内包表記
 
 s = set()
 
 for i in range(10):
-	if i % 2 == 0:
-		s.add(i)
+    if i % 2 == 0:
+        s.add(i)
 
 print(s)
 
@@ -1006,8 +1029,9 @@ print(s)
 # 63.ジェネレーター内包表記
 
 def g():
-	for i in range(10):
-		yield i
+    for i in range(10):
+        yield i
+
 
 g = g()
 
@@ -1020,8 +1044,7 @@ print(g)
 タプルにする場合はtuple()にする。
 """
 for x in g:
-	print(x)
-
+    print(x)
 
 # 64.名前空間とスコープ
 
@@ -1030,32 +1053,35 @@ test test ######################33
 """
 animal = 'cat'
 
+
 def f():
-	"""test func doc"""
-	print(f.__name__)
-	print(f.__doc__)
+    """test func doc"""
+    print(f.__name__)
+    print(f.__doc__)
+
 
 f()
 print('global:', globals())
 
-#flobals()でグローバル変数一覧を表示
+# flobals()でグローバル変数一覧を表示
 
 # 65.例外処理
 
 l = [1, 2, 3]
 i = 5
 try:
-	l[0]
+    l[0]
 except IndexError as exc:
-	print("don't worry:{}".format(exc))
-except NameError as ex :
-	print(ex)
+    print("don't worry:{}".format(exc))
+except NameError as ex:
+    print(ex)
 except Exception as ex:
-	print('other:{}'.format(ex))
+    print('other:{}'.format(ex))
 else:
-	print('done')
+    print('done')
 finally:
-	print('clean up')
+    print('clean up')
+
 
 # else:例外なく処理されたら実行される
 # finally:必ず実行される処理
@@ -1065,96 +1091,26 @@ finally:
 # raise IndexError('test error')
 
 class UppercaseError(Exception):
-	pass
+    pass
+
 
 def check():
-	words = {'APPLE', 'orange', 'banana'}
-	for word in words:
-		if word.isupper():
-			raise ValueError(word)
+    words = {'APPLE', 'orange', 'banana'}
+    for word in words:
+        if word.isupper():
+            raise ValueError(word)
+
 
 try:
-	check()
+    check()
 except ValueError as exc:
-	print('This is my fault. go next.')
+    print('This is my fault. go next.')
 
-
-import  lesson_package.utils as u
+import lesson_package.utils as u
 
 r = u.say_twice('hello')
 print(r)
 
 # gitチュートリアル
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# git statu
