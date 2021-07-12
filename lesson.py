@@ -1113,4 +1113,6 @@ print(r)
 
 # gitチュートリアル
 
-# git statu
+# git status
+
+# git diff
