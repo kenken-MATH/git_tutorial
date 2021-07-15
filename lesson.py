@@ -1116,3 +1116,5 @@ print(r)
 # git status
 
 # git diff
+
+# fit commit --amend
